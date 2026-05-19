@@ -1,47 +1,91 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+
+import ListPers from './components/ListPers.vue';
+
+import {ref, onMounted, computed} from 'vue';
+import MySelect from "@/components/MySelect.vue";
+import MyInput from './components/MyInput.vue';
+
+const pers = ref([]);
+
+const searchQuery = ref("");
+
+const selectedSort = ref("");
+const selectedOrder = ref("asc");
+
+const sortOpions = ref([
+  {value: 'name', name: 'По имени'},
+  {value: 'email', name: 'По почте'},
+  {value: 'body', name: 'По описанию'}
+]);
+const orderOptions = ref([
+  { value: 'asc', name: 'По возрастанию' },
+  { value: 'desc', name: 'По убыванию' }
+]);
+
+onMounted(async () => {
+  const response = await fetch('https://hp-api.onrender.com/api/characters');
+  pers.value = await response.json();
+  console.log(pers.value);
+});
+
+const sortedPost = computed(() => {
+  let result = [...pers.value];
+
+  // Фильтрация по имени
+  if (searchQuery.value.trim()) {
+    const query = searchQuery.value.toLowerCase().trim();
+    result = result.filter(post => {
+      return (post.name && post.name.toLowerCase().includes(query)) ||
+          (post.species && post.species.toLowerCase().includes(query)) ||
+          (post.actor && post.actor.toLowerCase().includes(query));
+    });
+  }
+
+  // Сортировка
+  if (selectedSort.value) {
+    result.sort((a, b) => {
+      const aVal = a[selectedSort.value];
+      const bVal = b[selectedSort.value];
+
+      if (selectedOrder.value === 'asc') {
+        return aVal.localeCompare(bVal);
+      } else {
+        return bVal.localeCompare(aVal);
+      }
+    });
+  }
+
+  return result;
+});
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="block-content">
+  <div>
+    <div class="sel">
+      <my-select v-model="selectedSort" :options="sortOpions"></my-select>
+      <my-select v-model="selectedOrder" :options="orderOptions"></my-select>
     </div>
-  </header>
+    <my-input class="sort"
+              v-model="searchQuery"
+              placeholder="Поиск по имени..."
+    ></my-input>
+  </div>
 
-  <main>
-    <TheWelcome />
-  </main>
+
+  <div>
+    <ListPers :pers="sortedPost"/>
+  </div>
+  </div>
+
+
+
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.block-content {
+  flex-direction: column;
+  max-width: 1400px;
 }
 </style>
