@@ -83,41 +83,193 @@ const handleFavorite = () => {
 </template>
 
 <style scoped>
-/* ... ваши старые стили карточки ... */
-.character-card { border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; margin: 20px; height: 100%; cursor: pointer; position: relative; }
-.character-card:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
-.image-container { position: relative; overflow: hidden; height: 300px; }
-.image-container img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.3s ease; }
-.info { padding: 20px; background: white; height: 100%; display: flex; flex-direction: column; }
-.character-name { font-size: 10pt; font-weight: 700; color: #333; margin: 0 0 15px 0; border-left: 4px solid #667eea; padding-left: 12px; }
-.info-item { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
-.info-label { font-weight: 600; color: #667eea; font-size: 10pt; text-transform: uppercase; letter-spacing: 0.5px; }
-.info-value { color: #555; font-size: 16px; text-align: right; margin-left: 15px; }
+.character-card {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 20px;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
 
+  /* Стеклянный фон */
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.character-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+/* Изображение */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.3s ease;
+}
+
+.character-card:hover .image-container img {
+  transform: scale(1.05);
+}
+
+/* Информация */
+.info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Имя персонажа */
+.character-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffd700;
+  margin: 0 0 15px 0;
+  border-left: 4px solid #ffd700;
+  padding-left: 12px;
+}
+
+/* Строка с инфой */
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Лейбл */
+.info-label {
+  font-weight: 600;
+  color: #b983ff;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Значение */
+.info-value {
+  color: #ccc;
+  font-size: 14px;
+  text-align: right;
+  margin-left: 15px;
+}
+
+/* ==========================================
+   КНОПКА ИЗБРАННОГО
+   ========================================== */
 .fav-btn {
   margin-top: 12px;
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  background: #f8f9fa;
-  border-radius: 6px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  background: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 13px;
-  transition: all 0.2s;
+  transition: all 0.3s;
   align-self: flex-start;
 }
-.fav-btn:hover { background: #e9ecef; }
-.fav-btn:active { transform: scale(0.98); }
 
-/* Модалка */
-.modal-inner { display: flex; flex-direction: column; gap: 16px; }
-.modal-header { display: flex; justify-content: space-between; align-items: center; }
-.modal-name { font-size: 20px; font-weight: 700; color: #333; border-left: 4px solid #667eea; padding-left: 12px; margin: 0; }
-.close-btn { background: none; border: none; font-size: 20px; cursor: pointer; color: #999; padding: 4px 8px; border-radius: 6px; }
-.close-btn:hover { background: #f0f0f0; color: #333; }
-.modal-info { display: flex; flex-direction: column; }
-.modal-row { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid #f0f0f0; gap: 12px; }
-.modal-label { font-weight: 600; color: #667eea; font-size: 10pt; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
-.modal-value { color: #555; font-size: 15px; text-align: right; }
-.alive { color: #2e7d32; font-weight: 600; }
-.dead { color: #b22222; font-weight: 600; }
+.fav-btn:hover {
+  background: rgba(255, 215, 0, 0.2);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+.fav-btn:active {
+  transform: scale(0.96);
+}
+
+/* ==========================================
+   МОДАЛЬНОЕ ОКНО
+   ========================================== */
+.modal-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffd700;
+  border-left: 4px solid #ffd700;
+  padding-left: 12px;
+  margin: 0;
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 18px;
+  cursor: pointer;
+  color: #ccc;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: rgba(255, 100, 100, 0.2);
+  border-color: rgba(255, 100, 100, 0.4);
+  color: #ff6b6b;
+}
+
+.modal-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 12px;
+}
+
+.modal-label {
+  font-weight: 600;
+  color: #b983ff;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.modal-value {
+  color: #ccc;
+  font-size: 14px;
+  text-align: right;
+}
+
+/* Статусы */
+.alive {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.dead {
+  color: #ff5252;
+  font-weight: 600;
+}
 </style>

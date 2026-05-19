@@ -27,9 +27,17 @@ const changeOption = (event) => {
 <style scoped>
 select {
   width: 100%;
-
+  background: rgba(255, 255, 126, 0.25);
+  color: #ffffff;
+  border: 1px solid #ffd700;
   margin-bottom: 15px;
   padding: 10px 15px;
-  border: 1px solid teal;
+  border-radius: 15px;
+  font-size: 12pt;
+
 }
+option {
+  background: #ffd700;
+}
+
 </style>
