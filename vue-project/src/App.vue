@@ -24,7 +24,7 @@ const orderOptions = ref([
 ]);
 
 onMounted(async () => {
-  const response = await fetch('https://hp-api.onrender.com/api/characters');
+  const response = await fetch('tsconfig.json');
   pers.value = await response.json();
   console.log(pers.value);
 });
@@ -62,7 +62,9 @@ const sortedPost = computed(() => {
 
 <template>
   <div class="block-content">
-  <div>
+    <h2 style="margin-bottom: 15px">Задание 2. Компонентный подход во Vue</h2>
+
+    <div>
     <div class="sel">
       <my-select v-model="selectedSort" :options="sortOpions"></my-select>
       <my-select v-model="selectedOrder" :options="orderOptions"></my-select>
@@ -87,5 +89,11 @@ const sortedPost = computed(() => {
 .block-content {
   flex-direction: column;
   max-width: 1400px;
+}
+h2 {
+  text-align: center;
+  padding: 0 20px 0px 20px;
+  font-weight: bold;
+
 }
 </style>
