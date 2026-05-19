@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "vue-project",
   "version": "0.0.0",
   "private": true,
@@ -18,5 +19,23 @@
   },
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
+=======
+  "name": "2_zadanie_Baturin32V",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "homepage": "https://github.com/natriyoy/UP_05.02-2026-2_Zadanie.git",
+  "private": true,
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.7",
+    "gh-pages": "^6.3.0",
+    "vite": "^8.0.13"
+>>>>>>> fdad0da4a129cfb139572a8f7d876ff440b0f8c8
   }
 }
