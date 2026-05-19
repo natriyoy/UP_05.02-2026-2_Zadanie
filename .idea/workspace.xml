@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfcc117f-9c5c-4859-b544-13ec42682799" name="Changes" comment="1">
-      <change afterPath="$PROJECT_DIR$/vue-project/src/components/ItemPers.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-project/src/components/ListPers.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-project/src/components/MyInput.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-project/src/components/MySelect.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-project/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-project/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-project/src/components/HelloWorld.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-project/src/components/TheWelcome.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-project/src/components/WelcomeItem.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +78,7 @@
       <option name="presentableId" value="Default" />
       <updated>1779167615603</updated>
       <workItem from="1779167616616" duration="900000" />
-      <workItem from="1779168704891" duration="8561000" />
+      <workItem from="1779168704891" duration="10454000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />

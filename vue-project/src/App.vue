@@ -12,7 +12,7 @@ const searchQuery = ref("");
 
 const selectedSort = ref("");
 const selectedOrder = ref("asc");
-
+const sortBy = ref("");
 const sortOpions = ref([
   {value: 'name', name: 'По имени'},
   {value: 'email', name: 'По почте'},
