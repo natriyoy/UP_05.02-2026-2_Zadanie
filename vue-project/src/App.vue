@@ -71,7 +71,7 @@ const sortedPost = computed(() => {
     </div>
     <my-input class="sort"
               v-model="searchQuery"
-              placeholder="Поиск по имени..."
+
     ></my-input>
   </div>
 
