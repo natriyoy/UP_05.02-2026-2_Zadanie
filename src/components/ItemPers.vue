@@ -13,6 +13,7 @@ const showDialog = ref(false);
 const handleFavorite = () => {
   emit('toggle-fav', props.post.name);
 };
+
 </script>
 
 <template>
@@ -44,7 +45,6 @@ const handleFavorite = () => {
         <span class="info-value">{{ post.gender === 'male' ? 'Мужской' : post.gender === 'female' ? 'Женский' : 'Отсутствует' }}</span>
       </div>
 
-      <!-- Кнопка избранного -->
       <button class="fav-btn" @click.stop="handleFavorite">
         {{ isFavorite ? '🗑️ Удалить из избранного' : '⭐ Добавить в избранное' }}
       </button>
@@ -57,25 +57,91 @@ const handleFavorite = () => {
         <h2 class="modal-name">{{ post.name || "Без имени" }}</h2>
         <button class="close-btn" @click="showDialog = false">✕</button>
       </div>
+
       <div class="modal-info">
-        <div class="modal-row" v-if="post.species"><span class="modal-label">Вид</span><span class="modal-value">{{ post.species }}</span></div>
-        <div class="modal-row"><span class="modal-label">Пол</span><span class="modal-value">{{ post.gender === 'male' ? 'Мужской' : post.gender === 'female' ? 'Женский' : 'Не указан' }}</span></div>
-        <div class="modal-row" v-if="post.house"><span class="modal-label">Факультет</span><span class="modal-value">{{ post.house }}</span></div>
-        <div class="modal-row" v-if="post.dateOfBirth"><span class="modal-label">Дата рождения</span><span class="modal-value">{{ post.dateOfBirth }}</span></div>
-        <div class="modal-row" v-if="post.yearOfBirth"><span class="modal-label">Год рождения</span><span class="modal-value">{{ post.yearOfBirth }}</span></div>
-        <div class="modal-row" v-if="post.ancestry"><span class="modal-label">Происхождение</span><span class="modal-value">{{ post.ancestry }}</span></div>
-        <div class="modal-row" v-if="post.eyeColour"><span class="modal-label">Цвет глаз</span><span class="modal-value">{{ post.eyeColour }}</span></div>
-        <div class="modal-row" v-if="post.hairColour"><span class="modal-label">Цвет волос</span><span class="modal-value">{{ post.hairColour }}</span></div>
-        <div class="modal-row" v-if="post.patronus"><span class="modal-label">Патронус</span><span class="modal-value">{{ post.patronus }}</span></div>
-        <div class="modal-row" v-if="post.actor"><span class="modal-label">Актер</span><span class="modal-value">{{ post.actor }}</span></div>
-        <div class="modal-row" v-if="post.alternate_actors && post.alternate_actors.length > 0"><span class="modal-label">Другие актеры</span><span class="modal-value">{{ post.alternate_actors.join(', ') }}</span></div>
-        <div class="modal-row" v-if="post.alternate_names && post.alternate_names.length > 0"><span class="modal-label">Другие имена</span><span class="modal-value">{{ post.alternate_names.join(', ') }}</span></div>
-        <div class="modal-row"><span class="modal-label">Волшебник</span><span class="modal-value">{{ post.wizard ? 'Да' : 'Нет' }}</span></div>
-        <div class="modal-row"><span class="modal-label">Студент Хогвартса</span><span class="modal-value">{{ post.hogwartsStudent ? 'Да' : 'Нет' }}</span></div>
-        <div class="modal-row"><span class="modal-label">Сотрудник Хогвартса</span><span class="modal-value">{{ post.hogwartsStaff ? 'Да' : 'Нет' }}</span></div>
-        <div class="modal-row"><span class="modal-label">Статус</span><span class="modal-value" :class="post.alive ? 'alive' : 'dead'">{{ post.alive ? '✅ Жив' : '💀 Мёртв' }}</span></div>
+        <div class="modal-row" v-if="post.species">
+          <span class="modal-label">Вид</span>
+          <span class="modal-value">{{ post.species }}</span>
+        </div>
+
+        <div class="modal-row">
+          <span class="modal-label">Пол</span>
+          <span class="modal-value">{{ post.gender === 'male' ? 'Мужской' : post.gender === 'female' ? 'Женский' : 'Не указан' }}</span>
+        </div>
+
+        <div class="modal-row" v-if="post.house">
+          <span class="modal-label">Факультет</span>
+          <span class="modal-value">{{ post.house }}</span>
+        </div>
+
+        <div class="modal-row" v-if="post.dateOfBirth">
+          <span class="modal-label">Дата рождения</span>
+          <span class="modal-value">{{ post.dateOfBirth }}</span>
+        </div>
+
+        <div class="modal-row" v-if="post.yearOfBirth">
+          <span class="modal-label">Год рождения</span>
+          <span class="modal-value">{{ post.yearOfBirth }}</span>
+        </div>
+
+        <div class="modal-row" v-if="post.ancestry">
+          <span class="modal-label">Происхождение</span>
+          <span class="modal-value">{{ post.ancestry }}</span>
+        </div>
+
+        <div class="modal-row" v-if="post.eyeColour">
+          <span class="modal-label">Цвет глаз</span>
+          <span class="modal-value">{{ post.eyeColour }}</span>
+        </div>
+
+        <div class="modal-row" v-if="post.hairColour">
+          <span class="modal-label">Цвет волос</span>
+          <span class="modal-value">{{ post.hairColour }}</span>
+        </div>
+
+        <div class="modal-row" v-if="post.patronus">
+          <span class="modal-label">Патронус</span>
+          <span class="modal-value">{{ post.patronus }}</span>
+        </div>
+
+        <div class="modal-row" v-if="post.actor">
+          <span class="modal-label">Актер</span>
+          <span class="modal-value">{{ post.actor }}</span>
+        </div>
+
+        <div class="modal-row" v-if="post.alternate_actors && post.alternate_actors.length">
+          <span class="modal-label">Другие актеры</span>
+          <span class="modal-value">{{ post.alternate_actors.join(', ') }}</span>
+        </div>
+
+        <div class="modal-row" v-if="post.alternate_names && post.alternate_names.length">
+          <span class="modal-label">Другие имена</span>
+          <span class="modal-value">{{ post.alternate_names.join(', ') }}</span>
+        </div>
+
+        <div class="modal-row">
+          <span class="modal-label">Волшебник</span>
+          <span class="modal-value">{{ post.wizard ? 'Да' : 'Нет' }}</span>
+        </div>
+
+        <div class="modal-row">
+          <span class="modal-label">Студент Хогвартса</span>
+          <span class="modal-value">{{ post.hogwartsStudent ? 'Да' : 'Нет' }}</span>
+        </div>
+
+        <div class="modal-row">
+          <span class="modal-label">Сотрудник Хогвартса</span>
+          <span class="modal-value">{{ post.hogwartsStaff ? 'Да' : 'Нет' }}</span>
+        </div>
+
+        <div class="modal-row">
+          <span class="modal-label">Статус</span>
+          <span class="modal-value" :class="post.alive ? 'alive' : 'dead'">{{ post.alive ? '✅ Жив' : '💀 Мёртв' }}</span>
+        </div>
+
         <div class="modal-row" v-if="post.wand && (post.wand.wood || post.wand.core || post.wand.length)">
-          <span class="modal-label">Палочка</span><span class="modal-value">{{ [post.wand.wood, post.wand.length] + "см" }}</span>
+          <span class="modal-label">Палочка</span>
+          <span class="modal-value">{{ post.wand.wood }}{{ post.wand.length ? ',' + post.wand.length + 'см' : '' }}</span>
         </div>
       </div>
     </div>
@@ -92,8 +158,6 @@ const handleFavorite = () => {
   height: 100%;
   cursor: pointer;
   position: relative;
-
-  /* Стеклянный фон */
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 215, 0, 0.1);
@@ -105,7 +169,6 @@ const handleFavorite = () => {
   border-color: rgba(255, 215, 0, 0.3);
 }
 
-/* Изображение */
 .image-container {
   position: relative;
   overflow: hidden;
@@ -124,14 +187,12 @@ const handleFavorite = () => {
   transform: scale(1.05);
 }
 
-/* Информация */
 .info {
   padding: 20px;
   display: flex;
   flex-direction: column;
 }
 
-/* Имя персонажа */
 .character-name {
   font-size: 16px;
   font-weight: 700;
@@ -141,7 +202,6 @@ const handleFavorite = () => {
   padding-left: 12px;
 }
 
-/* Строка с инфой */
 .info-item {
   display: flex;
   justify-content: space-between;
@@ -150,7 +210,6 @@ const handleFavorite = () => {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Лейбл */
 .info-label {
   font-weight: 600;
   color: #b983ff;
@@ -159,7 +218,6 @@ const handleFavorite = () => {
   letter-spacing: 0.5px;
 }
 
-/* Значение */
 .info-value {
   color: #ccc;
   font-size: 14px;
@@ -167,9 +225,6 @@ const handleFavorite = () => {
   margin-left: 15px;
 }
 
-/* ==========================================
-   КНОПКА ИЗБРАННОГО
-   ========================================== */
 .fav-btn {
   margin-top: 12px;
   padding: 8px 14px;
@@ -192,9 +247,6 @@ const handleFavorite = () => {
   transform: scale(0.96);
 }
 
-/* ==========================================
-   МОДАЛЬНОЕ ОКНО
-   ========================================== */
 .modal-inner {
   display: flex;
   flex-direction: column;
@@ -262,7 +314,6 @@ const handleFavorite = () => {
   text-align: right;
 }
 
-/* Статусы */
 .alive {
   color: #4caf50;
   font-weight: 600;

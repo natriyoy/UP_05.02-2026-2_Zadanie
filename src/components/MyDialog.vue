@@ -12,14 +12,14 @@ const hideDialog = () => {
 </script>
 
 <template>
-  <div class="dialog" v-if="show" @click="hideDialog">
+  <div class="dialog" v-if="show" @click.self="hideDialog">
     <div class="content_dialog" @click.stop>
       <slot></slot>
     </div>
   </div>
 </template>
 
-<style scoped>
+<style>
 .dialog {
   top: 0;
   bottom: 0;
@@ -32,7 +32,8 @@ const hideDialog = () => {
 }
 .content_dialog {
   margin: auto;
-  background: white;
+  background: #1a1a2e;
+  border: 1px solid rgba(255, 215, 0, 0.3);
   border-radius: 12px;
   padding: 25px;
   min-width: 300px;
