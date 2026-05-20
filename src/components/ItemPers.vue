@@ -4,7 +4,9 @@ import MyDialog from './MyDialog.vue';
 
 const props = defineProps({
   post: { type: Object, required: true },
-  isFavorite: { type: Boolean, default: false }
+  isFavorite: { type: Boolean, default: false },
+  currentUser: { type: Object, required: null }
+
 });
 
 const emit = defineEmits(['toggle-fav']);
@@ -23,7 +25,8 @@ const handleFavorite = () => {
       <img v-else src="/images/6aa77a42bc9f69519b4309243c116f8f.jpg" :alt="post.name">
     </div>
     <div class="info">
-      <h3 class="character-name">{{ post.name || "Отсутствует" }}</h3>
+      <h3 class="character-name">{{ post.name || "Отсутствует" }}
+      </h3>
       <div class="info-item">
         <span class="info-label">Вид:</span>
         <span class="info-value">{{ post.species || "Отсутствует" }}</span>
@@ -40,13 +43,13 @@ const handleFavorite = () => {
         <span class="info-label">Дом:</span>
         <span class="info-value">{{ post.house || "Отсутствует" }}</span>
       </div>
-      <div class="info-item">
+      <div class="info-item2 ">
         <span class="info-label">Пол:</span>
         <span class="info-value">{{ post.gender === 'male' ? 'Мужской' : post.gender === 'female' ? 'Женский' : 'Отсутствует' }}</span>
       </div>
 
-      <button class="fav-btn" @click.stop="handleFavorite">
-        {{ isFavorite ? '🗑️ Удалить из избранного' : '⭐ Добавить в избранное' }}
+      <button v-if="currentUser" class="fav-btn" @click.stop="handleFavorite">
+        {{ isFavorite ? 'Удалить из избранного' : 'Добавить в избранное' }}
       </button>
     </div>
   </div>
@@ -154,7 +157,7 @@ const handleFavorite = () => {
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin: 20px;
+  margin: 10px;
   height: 100%;
   cursor: pointer;
   position: relative;
@@ -188,7 +191,7 @@ const handleFavorite = () => {
 }
 
 .info {
-  padding: 20px;
+  padding:  20px 20px 0 20px;
   display: flex;
   flex-direction: column;
 }
@@ -198,8 +201,6 @@ const handleFavorite = () => {
   font-weight: 700;
   color: #ffd700;
   margin: 0 0 15px 0;
-  border-left: 4px solid #ffd700;
-  padding-left: 12px;
 }
 
 .info-item {
@@ -208,6 +209,14 @@ const handleFavorite = () => {
   align-items: baseline;
   padding: 8px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.info-item2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+
 }
 
 .info-label {
@@ -234,6 +243,8 @@ const handleFavorite = () => {
   border-radius: 8px;
   cursor: pointer;
   font-size: 13px;
+  width: 100%;
+  height: 40px;
   transition: all 0.3s;
   align-self: flex-start;
 }

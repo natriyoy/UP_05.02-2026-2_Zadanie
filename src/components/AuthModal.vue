@@ -1,5 +1,4 @@
 <template>
-  <!-- Модалка входа -->
   <div v-if="showLogin" class="modal-overlay" @click.self="emit('update:showLogin', false)">
     <div class="modal">
       <h3>Вход</h3>
@@ -12,7 +11,6 @@
     </div>
   </div>
 
-  <!-- Модалка регистрации -->
   <div v-if="showRegister" class="modal-overlay" @click.self="emit('update:showRegister', false)">
     <div class="modal">
       <h3>Регистрация</h3>
@@ -85,7 +83,10 @@ const login = () => {
     localStorage.setItem('hp_currentUser', JSON.stringify(currentUser))
     emit('login-success', currentUser)
     emit('update:showLogin', false)
-    loginForm.value = { login: '', password: '' }
+    loginForm.value = {
+      login: '',
+      password: ''
+    }
   } else {
     loginError.value = 'Неверный логин или пароль'
   }

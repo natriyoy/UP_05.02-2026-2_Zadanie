@@ -3,7 +3,8 @@ import ItemPers from './ItemPers.vue';
 
 defineProps({
   pers: { type: Array, required: true },
-  favorites: { type: Array, default: () => [] }
+  favorites: { type: Array, default: () => [] },
+  currentUser: { type: Object, default: null },
 });
 const emit = defineEmits(['toggle-fav']);
 </script>

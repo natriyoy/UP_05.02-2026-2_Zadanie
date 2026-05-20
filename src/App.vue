@@ -125,25 +125,21 @@ const wizardCount = computed(() => {
     nonWizard: favs.filter(p => !p.wizard).length
   }
 })
+console.log(currentUser.value)
 </script>
 
 <template>
   <div class="block-content">
     <header class="top-bar">
-      <div v-if="currentUser" class="favorites-info">
-        Избранное: волшебники - {{ wizardCount.wizard }}; не волшебники - {{ wizardCount.nonWizard }}
-      </div>
-      <div v-else></div>
-
       <div class="user-section">
-        <template v-if="currentUser">
-          <span class="user-name">{{ currentUser.fullName }}</span>
+        <div v-if="currentUser">
           <button class="btn logout-btn" @click="logout">Выйти</button>
-        </template>
-        <template v-else>
+          <span class="user-name">{{ currentUser.fullName }}</span>
+        </div>
+        <div v-else>
           <button class="btn btn-gold" @click="showLogin = true">Вход</button>
           <button class="btn btn-outline" @click="showRegister = true">Регистрация</button>
-        </template>
+        </div>
       </div>
     </header>
 
@@ -152,22 +148,12 @@ const wizardCount = computed(() => {
     <div class="controls">
       <div class="filters">
         <div class="filter-block">
-          <h4>Пол:</h4>
+          <h4 class="cold">Пол:</h4>
           <label><input type="checkbox" value="male" v-model="selectedGender"> Мужской</label>
           <label><input type="checkbox" value="female" v-model="selectedGender"> Женский</label>
         </div>
-
-        <div >
-          <my-input v-model="searchQuery" placeholder="Поиск..." class="sort" />
-          <div class="sel">
-            <MySelect v-model="selectedSort" :options="sortOptions" />
-            <MySelect v-model="selectedOrder" :options="orderOptions" />
-          </div>
-          <button class="reset-btn" @click="resetFilters">Сбросить</button>
-        </div>
-
         <div class="filter-block">
-          <h4>Факультет:</h4>
+          <h4 class="cold">Факультет:</h4>
           <label>
             <input type="checkbox" value="Gryffindor" v-model="selectedHouse"> Гриффиндор</label>
           <label>
@@ -177,6 +163,20 @@ const wizardCount = computed(() => {
           <label>
             <input type="checkbox" value="Hufflepuff" v-model="selectedHouse"> Пуффендуй</label>
         </div>
+        <div >
+          <my-input v-model="searchQuery" placeholder="Поиск..." class="sort" />
+          <div class="sel">
+            <MySelect v-model="selectedSort" :options="sortOptions" />
+            <MySelect v-model="selectedOrder" :options="orderOptions" />
+          </div>
+          <button class="reset-btn" @click="resetFilters">Сбросить</button>
+        </div>
+        <div v-if="currentUser" class="favorites-info">
+          <div><div class="cold">Избранное:</div>
+            волшебники - {{ wizardCount.wizard }} </div>
+          <div>не волшебники - {{ wizardCount.nonWizard }}</div>
+        </div>
+
       </div>
     </div>
 
@@ -185,7 +185,7 @@ const wizardCount = computed(() => {
       <div class="count-row">
         <p class="name">Найдено: {{ sortedPost.length }}</p>
       </div>
-      <ListPers :pers="sortedPost" :favorites="favorites" @toggle-fav="toggleFavorite" />
+      <ListPers :pers="sortedPost" :favorites="favorites" :currentUser="currentUser" @toggle-fav="toggleFavorite" />
     </div>
   </div>
 
@@ -207,8 +207,6 @@ const wizardCount = computed(() => {
   background: rgba(255, 255, 255, 0.06);
   cursor: pointer;
   transition: 0.3s;
-  margin: 0;
-  flex-shrink: 0;
   position: relative;
 }
 .filter-block input:hover,
@@ -255,17 +253,20 @@ html, body {
 }
 .top-bar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
   padding: 24px;
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0 0 24px 24px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 }
-.top-bar:hover { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+
+.top-bar:hover {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
 .btn {
   padding: 8px 18px;
   border-radius: 25px;
@@ -275,16 +276,62 @@ html, body {
   font-weight: 500;
   transition: all 0.3s ease;
 }
-.btn-gold { background: #ffd700; color: #1a1a2e; border: 1px solid #ffd700; }
-.btn-gold:hover { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
-.btn-outline { background: transparent; border: 1px solid #ffd700; color: #ffd700; }
-.btn-outline:hover { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); background: #ffd700; color: #1a1a2e; }
-.user-section button { margin-left: 10px; }
-.user-name { font-weight: 600; margin-right: 10px; }
-.favorites-info { font-weight: bold; }
-.logout-btn { background: #ffd700; color: #1a1a2e; border: 1px solid #ffd700; }
-h2 { text-align: center; padding: 20px; }
-.name { font-size: 14pt; padding-top: 20px; color: #ffd700; }
+.btn-gold {
+  background: #ffd700;
+  color: #1a1a2e;
+  border: 1px solid #ffd700;
+}
+
+.btn-gold:hover {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #ffd700;
+  color: #ffd700;
+}
+
+.btn-outline:hover {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  background: #ffd700;
+  color: #1a1a2e;
+}
+
+.user-section button {
+  margin-right: 10px;
+}
+
+.user-name {
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.favorites-info {
+  font-weight: bold;
+}
+
+.logout-btn {
+  background: #ffd700;
+  color: #1a1a2e;
+  border: 1px solid #ffd700;
+}
+
+h2 {
+  text-align: center;
+  padding: 20px;
+}
+
+.name {
+  font-size: 14pt;
+  padding-top: 20px;
+  color: #ffd700;
+}
+.cold {
+  color: #ffd700;
+  font-size: 14pt;
+}
+
 .controls {
   padding: 20px;
   background: rgba(255, 255, 255, 0.04);
@@ -302,7 +349,7 @@ h2 { text-align: center; padding: 20px; }
   border: 1px solid #ffd700;
   border-radius: 8px;
   justify-content: center;
-  align-items: center;
+
 }
 .filter-block h4 { margin-bottom: 10px; }
 .filter-block label { display: block; cursor: pointer; }
