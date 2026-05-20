@@ -4,8 +4,9 @@ import ItemPers from './ItemPers.vue';
 defineProps({
   pers: { type: Array, required: true },
   favorites: { type: Array, default: () => [] },
-  currentUser: { type: Object, default: null },
+  currentUser: { type: Object, default: null }
 });
+
 const emit = defineEmits(['toggle-fav']);
 </script>
 
@@ -15,8 +16,9 @@ const emit = defineEmits(['toggle-fav']);
       <ItemPers
           :post="per"
           :is-favorite="favorites.includes(per.name)"
+          :current-user="currentUser"
           @toggle-fav="(name) => emit('toggle-fav', name)"
-      ></ItemPers>
+      />
     </div>
   </div>
 </template>

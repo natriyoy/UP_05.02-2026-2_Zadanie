@@ -1,36 +1,39 @@
 <template>
+  <!-- Модалка Входа -->
   <div v-if="showLogin" class="modal-overlay" @click.self="emit('update:showLogin', false)">
     <div class="modal">
       <h3>Вход</h3>
       <form @submit.prevent="login">
-        <input v-model="loginForm.login" placeholder="Логин" required />
-        <input v-model="loginForm.password" type="password" placeholder="Пароль" required />
+        <MyInput v-model="loginForm.login" placeholder="Логин" />
+        <MyInput v-model="loginForm.password" type="password" placeholder="Пароль" />
+
         <p v-if="loginError" class="err">{{ loginError }}</p>
         <button type="submit">Войти</button>
       </form>
     </div>
   </div>
 
+  <!-- Модалка Регистрации -->
   <div v-if="showRegister" class="modal-overlay" @click.self="emit('update:showRegister', false)">
     <div class="modal">
       <h3>Регистрация</h3>
       <form @submit.prevent="register">
-        <input v-model="regForm.login" placeholder="Логин" />
+        <MyInput v-model="regForm.login" placeholder="Логин" />
         <span class="err">{{ regErrors.login }}</span>
 
-        <input v-model="regForm.password" type="password" placeholder="Пароль" />
+        <MyInput v-model="regForm.password" type="password" placeholder="Пароль" />
         <span class="err">{{ regErrors.password }}</span>
 
-        <input v-model="regForm.surname" placeholder="Фамилия" />
+        <MyInput v-model="regForm.surname" placeholder="Фамилия" />
         <span class="err">{{ regErrors.surname }}</span>
 
-        <input v-model="regForm.name" placeholder="Имя" />
+        <MyInput v-model="regForm.name" placeholder="Имя" />
         <span class="err">{{ regErrors.name }}</span>
 
-        <input v-model="regForm.patronymic" placeholder="Отчество" />
+        <MyInput v-model="regForm.patronymic" placeholder="Отчество" />
         <span class="err">{{ regErrors.patronymic }}</span>
 
-        <input v-model="regForm.phone" placeholder="8(XXX)XXX-XX-XX" />
+        <MyInput v-model="regForm.phone" placeholder="8(XXX)XXX-XX-XX" />
         <span class="err">{{ regErrors.phone }}</span>
 
         <div class="radio-group">
@@ -39,7 +42,7 @@
         </div>
         <span class="err">{{ regErrors.gender }}</span>
 
-        <input v-model.number="regForm.age" type="number" placeholder="Возраст" />
+        <MyInput v-model="regForm.age" type="number" placeholder="Возраст" />
         <span class="err">{{ regErrors.age }}</span>
 
         <div class="checkboxes">
@@ -58,6 +61,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import MyInput from '../../ui/MyInput.vue' // Не забудь импортировать!
 
 const props = defineProps({
   showLogin: Boolean,
@@ -83,10 +87,7 @@ const login = () => {
     localStorage.setItem('hp_currentUser', JSON.stringify(currentUser))
     emit('login-success', currentUser)
     emit('update:showLogin', false)
-    loginForm.value = {
-      login: '',
-      password: ''
-    }
+    loginForm.value = { login: '', password: '' }
   } else {
     loginError.value = 'Неверный логин или пароль'
   }
@@ -141,23 +142,18 @@ const register = () => {
   users.push({ ...f })
   localStorage.setItem('hp_users', JSON.stringify(users))
 
-  // после регистрации — открываем вход
   emit('update:showRegister', false)
   emit('update:showLogin', true)
 
-  // очищаем форму
   regForm.value = { login: '', password: '', surname: '', name: '', patronymic: '', phone: '', gender: '', age: '', houses: [] }
 }
 </script>
 
 <style scoped>
 .modal-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   z-index: 1000;
 }
 
@@ -166,83 +162,55 @@ const register = () => {
   border: 1px solid rgba(255, 215, 0, 0.3);
   border-radius: 12px;
   padding: 30px;
-  width: 90%;
-  max-width: 420px;
-  max-height: 90vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  width: 90%; max-width: 420px;
+  max-height: 90vh; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 4px;
 }
 
-h3 {
-  color: #ffd700;
-  margin: 0 0 16px 0;
-  text-align: center;
+h3 { color: #ffd700; margin: 0 0 16px 0; text-align: center; }
+
+form { display: flex; flex-direction: column; gap: 4px; }
+
+/* Стили для радио и чекбоксов остались прежними, так как MyInput их не заменяет */
+.radio-group{
+  display: flex; flex-wrap: wrap; gap: 10px; margin: 4px 0;
+}
+.radio-group label{
+  display: flex; align-items: center; gap: 6px;
+  color: #ccc; font-size: 13px; cursor: pointer;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.checkboxes input[type="checkbox"] {
+  appearance: none;
+  width: 20px; height: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer; transition: 0.3s;
+  position: relative; vertical-align: middle; margin-right: 8px;
 }
-
-input[type="text"],
-input[type="password"],
-input[type="number"] {
-  width: 100%;
-  box-sizing: border-box;
-  background: rgba(255, 255, 126, 0.08);
-  color: #fff;
-  border: 1px solid rgba(255, 215, 0, 0.4);
-  padding: 10px 14px;
-  border-radius: 8px;
-  font-size: 13px;
+.checkboxes input[type="checkbox"]:hover {
+  border-color: #ffd700; box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
 }
-
-input::placeholder {
-  color: rgba(255,255,255,0.4);
+.checkboxes input[type="checkbox"]:checked {
+  background: rgba(255, 215, 0, 0.2); border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
-
-.radio-group,
-.checkboxes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 4px 0;
+.checkboxes input[type="checkbox"]:checked::after {
+  content: '✓'; position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  color: #ffd700; font-size: 12px; font-weight: bold; line-height: 1;
 }
-
-.radio-group label,
-.checkboxes label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #ccc;
-  font-size: 13px;
-  cursor: pointer;
-}
-
 button[type="submit"] {
-  margin-top: 12px;
-  padding: 10px;
-  background: #ffd700;
-  color: #1a1a2e;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
+  margin-top: 12px; padding: 10px;
+  background: #ffd700; color: #1a1a2e;
+  border: none; border-radius: 8px;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: 0.2s;
 }
-
 button[type="submit"]:hover {
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
 }
 
-.err {
-  color: #ff5252;
-  font-size: 11px;
-  min-height: 14px;
-  padding-left: 4px;
-}
+.err { color: #ff5252; font-size: 11px; min-height: 14px; padding-left: 4px; }
 </style>
