@@ -31,15 +31,10 @@ const closeDialog = () => emit('update:show', false)
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
-
-
   border-radius: 20px;
-
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-
   background: #1a1a2e;
-
   border: 1px solid rgba(255, 215, 0, 0.1);
 }
 </style>

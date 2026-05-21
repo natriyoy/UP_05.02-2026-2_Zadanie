@@ -4,7 +4,7 @@ import { computed } from 'vue'
 const props = defineProps({
   type: {
     type: String,
-    default: 'default', // 'default', 'gold', 'outline', 'danger'
+    default: 'default',
   },
   disabled: {
     type: Boolean,
@@ -12,29 +12,21 @@ const props = defineProps({
   }
 })
 
-// Динамический класс в зависимости от типа кнопки
 const buttonClass = computed(() => ({
   'btn': true,
   'btn-gold': props.type === 'gold',
   'btn-outline': props.type === 'outline',
-  'btn-danger': props.type === 'danger',
-  'btn-default': props.type === 'default'
 }))
 </script>
 
 <template>
-  <button
-      :class="buttonClass"
-      :disabled="disabled"
-      v-bind="$attrs"
-  >
+  <button :class="buttonClass" :disabled="disabled" v-bind="$attrs">
     <slot></slot>
   </button>
 </template>
 
 <style scoped>
 .btn {
-
   padding: 8px 18px;
   border-radius: 25px;
   border: none;
@@ -52,7 +44,7 @@ const buttonClass = computed(() => ({
   cursor: not-allowed;
 }
 
-/* Золотая кнопка (основная) */
+/* Золотая кнопка */
 .btn-gold {
   background: #ffd700;
   color: #1a1a2e;
@@ -63,7 +55,7 @@ const buttonClass = computed(() => ({
   transform: translateY(-1px);
 }
 
-/* Прозрачная с обводкой (второстепенная) */
+/* Прозрачная с обводкой*/
 .btn-outline {
   background: transparent;
   border: 1px solid #ffd700;
@@ -73,26 +65,5 @@ const buttonClass = computed(() => ({
   background: #ffd700;
   color: #1a1a2e;
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-}
-
-/* Красная кнопка (удалить/выйти) */
-.btn-danger {
-  background: #ff5252;
-  color: white;
-  border: 1px solid #ff5252;
-}
-.btn-danger:hover:not(:disabled) {
-  background: #ff1744;
-  box-shadow: 0 0 15px rgba(255, 82, 82, 0.4);
-}
-
-/* Обычная серая кнопка */
-.btn-default {
-  background: #f5f5f5;
-  color: #333;
-  border: 1px solid #ccc;
-}
-.btn-default:hover:not(:disabled) {
-  background: #e0e0e0;
 }
 </style>
