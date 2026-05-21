@@ -14,7 +14,9 @@ defineProps({
       <div class="cold">Избранное:</div>
       волшебники - {{ wizardCount }}
     </div>
-    <div>не волшебники - {{ nonWizardCount }}</div>
+    <div>
+      не волшебники - {{ nonWizardCount }}
+    </div>
   </div>
 </template>
 

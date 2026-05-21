@@ -21,7 +21,7 @@ const handleFavorite = () => {
   <div class="character-card" @click="showDialog = true">
     <div class="image-container">
       <img v-if="post.image && post.image !== ''" :src="post.image" :alt="post.name">
-      <img v-else src="/images/orig.webp" :alt="post.name">
+      <img v-else src="./images/error.webp" :alt="post.name">
     </div>
     <div class="info">
       <h3 class="character-name">{{ post.name || "Отсутствует" }}</h3>
@@ -53,9 +53,7 @@ const handleFavorite = () => {
           {{ post.gender === 'male' ? 'Мужской' : post.gender === 'female' ? 'Женский' : 'Отсутствует' }}
         </span>
       </div>
-      <BaseButton type="gold" v-if="currentUser" style="width: 100%; margin-top: 10px" @click.stop="handleFavorite">
-        {{ isFavorite ? 'Удалить из избранного' : 'Добавить в избранное' }}
-      </BaseButton>
+      <BaseButton type="gold" v-if="currentUser" style="width: 100%; margin-top: 10px" @click.stop="handleFavorite">{{ isFavorite ? 'Удалить из избранного' : 'Добавить в избранное' }}</BaseButton>
     </div>
   </div>
     <MyDialog v-model:show="showDialog">

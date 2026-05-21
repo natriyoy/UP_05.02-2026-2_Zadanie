@@ -5,31 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfcc117f-9c5c-4859-b544-13ec42682799" name="Changes" comment="2">
-      <change afterPath="$PROJECT_DIR$/public/images/error.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/features/characters/ItemPers.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/features/favorites/FavoritesStats.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/FilterPanel.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/UserNavbar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/BaseButton.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/BaseModal.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/MyDialog.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/MyInput.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/composable/useFilters.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AuthModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/features/auth/AuthModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ItemPers.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ListPers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/features/characters/ListPers.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Modal/ModalContentCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/composable/useFavorites.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Modal/ModalDialog.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyDialog.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyInput.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MySelect.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/MySelect.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/IconCommunity.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/IconDocumentation.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/IconEcosystem.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/IconSupport.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/IconTooling.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/features/characters/ItemPers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/features/characters/ItemPers.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/features/characters/ListPers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/features/characters/ListPers.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/features/favorites/FavoritesStats.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/features/favorites/FavoritesStats.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/FilterPanel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/FilterPanel.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +23,7 @@
         <option value="tsconfig.json" />
         <option value="HTML File" />
         <option value="Vue Composition API Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -83,7 +65,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "vcs.Git",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2025.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -110,7 +92,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.26053.12" />
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-WS-252.23892.411" />
       </set>
     </attachedChunks>
   </component>
@@ -130,6 +112,7 @@
       <workItem from="1779292293908" duration="77000" />
       <workItem from="1779292379186" duration="7315000" />
       <workItem from="1779301574305" duration="6312000" />
+      <workItem from="1779340349061" duration="1555000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />

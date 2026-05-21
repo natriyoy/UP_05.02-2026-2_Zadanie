@@ -13,12 +13,7 @@ const emit = defineEmits(['toggle-fav']);
 <template>
   <div class="grid-block">
     <div v-for="(per, index) in pers" :key="index">
-      <ItemPers
-          :post="per"
-          :is-favorite="favorites.includes(per.name)"
-          :current-user="currentUser"
-          @toggle-fav="(name) => emit('toggle-fav', name)"
-      />
+      <ItemPers :post="per" :is-favorite="favorites.includes(per.name)" :current-user="currentUser" @toggle-fav="(name) => emit('toggle-fav', name)"/>
     </div>
   </div>
 </template>
