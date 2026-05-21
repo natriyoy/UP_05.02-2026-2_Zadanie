@@ -95,7 +95,7 @@ const handleResetFilters = () => {
       <div class="count-row">
         <p class="name">Найдено: {{ sortedPost.length }}</p>
       </div>
-      <div class="eroo-mes" v-if="sortedPost.length < 1">Персонажи по заданным параметрам не найдены, измените параметры поиска</div>
+      <div class="eroo-mes" v-if="sortedPost.length < 1">Персонажи по заданным параметрам не найдены,<br> измените параметры поиска</div>
       <ListPers :pers="sortedPost" :favorites="favorites" :current-user="currentUser" @toggle-fav="toggleFavorite"/>
     </div>
   </div>
@@ -130,7 +130,8 @@ html, body {
 }
 .eroo-mes {
   text-align: center;
-
+  font-size: 20pt;
+  color: #ffd700;
 }
 h2 {
   text-align: center;
